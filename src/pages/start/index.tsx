@@ -1,20 +1,21 @@
-import { Button } from '@/components/ui/button';
-import { ButtonGroup } from '@/components/ui/button-group';
-import { Slider } from '@/components/ui/slider';
-import { useNavigate } from 'react-router';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { Button } from '@/components/ui/button.tsx';
+import { ButtonGroup } from '@/components/ui/button-group.tsx';
+import { Slider } from '@/components/ui/slider.tsx';
 
 export const StartPage: React.FC = () => {
   const navigate = useNavigate();
   const [courts, setCourts] = useState(1);
   const [players, setPlayers] = useState(8);
+
   return (
     <>
-      <div className="bg-bgColor flex h-dvh w-dvw flex-col items-center justify-center">
+      <div className="bg-bgColor flex h-screen w-screen flex-col items-center justify-center">
         <div className="text-fontColor flex h-1/6 items-center text-4xl underline">
           MATCH SETUP
         </div>
-        <div className="flex h-2/3 w-dvw flex-col items-center">
+        <div className="flex h-2/3 w-screen flex-col items-center">
           <CourtsCard setCourts={setCourts} />
           <PlayersCard players={players} setPlayers={setPlayers} />
           <div className="my-5 flex flex-col items-center">
@@ -22,13 +23,12 @@ export const StartPage: React.FC = () => {
             <div className="text-fontColor">Players: {players}</div>
           </div>
         </div>
-        <div className="flex h-1/6 w-dvw justify-center">
+        <div className="flex h-1/6 w-screen items-center justify-center">
           <Button
             variant="default"
             size="slg"
-            className="my-10"
             onClick={() => {
-              navigate(`/match?courts=${courts}&players=${players}`);
+              void navigate(`/match?courts=${courts}&players=${players}`);
             }}
           >
             Start
@@ -41,7 +41,11 @@ export const StartPage: React.FC = () => {
 
 const CourtsCard: React.FC<{
   setCourts: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ setCourts }) => {
+}> = ({
+  setCourts,
+}: {
+  setCourts: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   return (
     <>
       <div className="bg-cardColor mt-5 flex w-4/5 flex-col items-center rounded-4xl py-3">
@@ -71,7 +75,13 @@ const CourtsCard: React.FC<{
 const PlayersCard: React.FC<{
   players: number;
   setPlayers: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ players, setPlayers }) => {
+}> = ({
+  players,
+  setPlayers,
+}: {
+  players: number;
+  setPlayers: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   return (
     <>
       <div className="bg-cardColor mt-5 flex w-4/5 flex-col items-center rounded-4xl py-3">
