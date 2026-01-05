@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai';
 import { useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button.tsx';
-import { useMatchResult } from '@/hooks/useMatchResult.hook.ts';
+import {
+  getTotalMatches,
+  useMatchResult,
+} from '@/hooks/useMatchResult.hook.ts';
 
 export const MatchPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -12,6 +15,8 @@ export const MatchPage: React.FC = () => {
   const players = Number(searchParams.get('players')) || 8;
 
   const { teamA, teamB } = useMatchResult(match, players, courts);
+  const totalMatches = getTotalMatches(players);
+  const displayMatch = totalMatches > 0 ? (match % totalMatches) + 1 : 0;
 
   console.log(`Courts: ${courts}, Players: ${players}`);
 
@@ -22,7 +27,9 @@ export const MatchPage: React.FC = () => {
           MATCH RESULT
         </div>
         <div className="flex h-2/3 w-screen flex-col items-center">
-          <span className="text-fontColor text-lg">Match {match + 1}</span>
+          <span className="text-fontColor text-lg">
+            Match {displayMatch} / {totalMatches}
+          </span>
           <PlayerCard
             playerName1={teamA.player1}
             playerName2={teamA.player2}

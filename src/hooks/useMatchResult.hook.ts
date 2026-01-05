@@ -6,6 +6,10 @@ export const useMatchResult = (
   return matchPairs[players - 5][match % matchPairs[players - 5].length];
 };
 
+export const getTotalMatches = (players: number) => {
+  return matchPairs[players - 5]?.length ?? 0;
+};
+
 const matchPairs = [
   [
     // Match 1
