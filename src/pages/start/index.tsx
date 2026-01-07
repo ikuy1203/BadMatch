@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { Button } from '@/components/ui/button.tsx';
 import { ButtonGroup } from '@/components/ui/button-group.tsx';
 import { Slider } from '@/components/ui/slider.tsx';
+import { cn } from '@/lib/utils.ts';
 
 export const StartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export const StartPage: React.FC = () => {
           MATCH SETUP
         </div>
         <div className="flex h-2/3 w-screen flex-col items-center">
-          <CourtsCard setCourts={setCourts} />
+          <CourtsCard courts={courts} setCourts={setCourts} />
           <PlayersCard players={players} setPlayers={setPlayers} />
           <div className="my-5 flex flex-col items-center">
             <div className="text-fontColor">Courts: {courts}</div>
@@ -40,10 +41,13 @@ export const StartPage: React.FC = () => {
 };
 
 const CourtsCard: React.FC<{
+  courts: number;
   setCourts: React.Dispatch<React.SetStateAction<number>>;
 }> = ({
+  courts,
   setCourts,
 }: {
+  courts: number;
   setCourts: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   return (
@@ -54,18 +58,17 @@ const CourtsCard: React.FC<{
           Number of courts in use
         </div>
         <ButtonGroup>
-          <Button variant={'outline'} size={'lg'} onClick={() => setCourts(1)}>
-            1
-          </Button>
-          <Button variant={'outline'} size={'lg'} onClick={() => setCourts(2)}>
-            2
-          </Button>
-          <Button variant={'outline'} size={'lg'} onClick={() => setCourts(3)}>
-            3
-          </Button>
-          <Button variant={'outline'} size={'lg'} onClick={() => setCourts(4)}>
-            4
-          </Button>
+          {[1, 2, 3, 4].map((num) => (
+            <Button
+              key={`num-courts-${num}`}
+              variant={'outline'}
+              size={'lg'}
+              className={cn(courts === num ? 'bg-gray-200' : '')}
+              onClick={() => setCourts(num)}
+            >
+              {num}
+            </Button>
+          ))}
         </ButtonGroup>
       </div>
     </>
