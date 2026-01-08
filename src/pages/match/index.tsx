@@ -25,14 +25,14 @@ export const MatchPage: React.FC = () => {
 
   return (
     <>
-      <div className="bg-bgColor flex h-screen w-screen flex-col items-center justify-center">
-        <div className="text-fontColor flex h-1/6 items-center text-4xl tracking-wide underline">
+      <div className="bg-bgColor flex min-h-screen w-screen flex-col items-center">
+        <div className="text-fontColor flex shrink-0 items-center py-6 text-4xl tracking-wide underline">
           MATCH RESULT
         </div>
         <div
           className={cn(
-            'flex w-full max-w-5xl flex-col items-center gap-3 px-6',
-            viewMode === 'single' ? 'h-2/3' : 'h-5/6',
+            'flex min-h-0 w-full max-w-5xl flex-1 flex-col items-center gap-3 overflow-y-auto px-6',
+            viewMode === 'single' ? 'min-h-0' : 'min-h-0',
           )}
         >
           <div className="bg-cardColor my-2 flex items-center gap-3 rounded-full px-4 py-2 shadow-sm">
@@ -78,7 +78,7 @@ export const MatchPage: React.FC = () => {
           )}
         </div>
         {viewMode === 'single' && (
-          <div className="flex h-1/6 w-full items-center justify-center">
+          <div className="flex w-full items-center justify-center py-6">
             <div className="flex w-full max-w-5xl justify-center gap-6 px-6">
               <Button
                 variant="secondary"

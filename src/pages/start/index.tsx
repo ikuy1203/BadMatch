@@ -12,11 +12,11 @@ export const StartPage: React.FC = () => {
 
   return (
     <>
-      <div className="bg-bgColor flex h-screen w-screen flex-col items-center justify-center">
-        <div className="text-fontColor flex h-1/6 items-center text-4xl tracking-wide underline">
+      <div className="bg-bgColor flex min-h-screen w-screen flex-col items-center">
+        <div className="text-fontColor flex shrink-0 items-center py-6 text-4xl tracking-wide underline">
           MATCH SETUP
         </div>
-        <div className="flex h-2/3 w-full max-w-4xl flex-col items-center gap-4 px-6">
+        <div className="flex min-h-0 w-full max-w-4xl flex-1 flex-col items-center gap-4 overflow-y-auto px-6">
           <CourtsCard courts={courts} setCourts={setCourts} />
           <PlayersCard players={players} setPlayers={setPlayers} />
           <div className="bg-cardColor text-fontColor mt-2 flex w-full max-w-2xl items-center justify-between rounded-3xl px-6 py-3 shadow-sm">
@@ -26,7 +26,7 @@ export const StartPage: React.FC = () => {
             <div className="text-2xl">{players}</div>
           </div>
         </div>
-        <div className="flex h-1/6 w-full items-center justify-center">
+        <div className="flex w-full items-center justify-center py-6">
           <div className="flex w-full max-w-4xl justify-center px-6">
             <Button
               variant="default"
