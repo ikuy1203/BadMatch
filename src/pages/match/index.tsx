@@ -26,16 +26,16 @@ export const MatchPage: React.FC = () => {
   return (
     <>
       <div className="bg-bgColor flex h-screen w-screen flex-col items-center justify-center">
-        <div className="text-fontColor flex h-1/6 items-center text-4xl underline">
+        <div className="text-fontColor flex h-1/6 items-center text-4xl tracking-wide underline">
           MATCH RESULT
         </div>
         <div
           className={cn(
-            'flex w-screen flex-col items-center',
+            'flex w-full max-w-5xl flex-col items-center gap-3 px-6',
             viewMode === 'single' ? 'h-2/3' : 'h-5/6',
           )}
         >
-          <div className="my-1">
+          <div className="bg-cardColor my-2 flex items-center gap-3 rounded-full px-4 py-2 shadow-sm">
             <Button
               variant="secondary"
               size="sm"
@@ -59,7 +59,7 @@ export const MatchPage: React.FC = () => {
           </div>
           {viewMode === 'single' ? (
             <>
-              <span className="text-fontColor text-lg">
+              <span className="text-fontColor text-sm tracking-wider uppercase">
                 Match {displayMatch} / {totalMatches}
               </span>
               <PlayerCard
@@ -78,35 +78,35 @@ export const MatchPage: React.FC = () => {
           )}
         </div>
         {viewMode === 'single' && (
-          <div className="flex h-1/6 w-screen items-center justify-center">
-            <Button
-              variant="secondary"
-              size="lg"
-              className="mx-3"
-              onClick={() => {
-                setIsProcessing(true);
-                setMatch((prev) => (prev > 0 ? prev - 1 : prev));
-                setTimeout(() => setIsProcessing(false), 200);
-              }}
-              disabled={isProcessing}
-            >
-              <AiOutlineCaretLeft />
-              Prev Match
-            </Button>
-            <Button
-              variant="default"
-              size="lg"
-              className="mx-3"
-              disabled={isProcessing}
-              onClick={() => {
-                setIsProcessing(true);
-                setMatch((prev) => prev + 1);
-                setTimeout(() => setIsProcessing(false), 200);
-              }}
-            >
-              <AiOutlineCaretRight />
-              Next Match
-            </Button>
+          <div className="flex h-1/6 w-full items-center justify-center">
+            <div className="flex w-full max-w-5xl justify-center gap-6 px-6">
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={() => {
+                  setIsProcessing(true);
+                  setMatch((prev) => (prev > 0 ? prev - 1 : prev));
+                  setTimeout(() => setIsProcessing(false), 200);
+                }}
+                disabled={isProcessing}
+              >
+                <AiOutlineCaretLeft />
+                Prev Match
+              </Button>
+              <Button
+                variant="default"
+                size="lg"
+                disabled={isProcessing}
+                onClick={() => {
+                  setIsProcessing(true);
+                  setMatch((prev) => prev + 1);
+                  setTimeout(() => setIsProcessing(false), 200);
+                }}
+              >
+                <AiOutlineCaretRight />
+                Next Match
+              </Button>
+            </div>
           </div>
         )}
       </div>
@@ -129,11 +129,11 @@ const PlayerCard: React.FC<{
 }) => {
   return (
     <>
-      <div className="bg-cardColor text-fontColor mt-3 flex w-4/5 flex-col items-center rounded-4xl py-3">
-        <div className="text-2xl">{teamName}</div>
-        <div className="my-1 text-5xl">{playerName1}</div>
-        <div className="text-5xl">&</div>
-        <div className="my-1 text-5xl">{playerName2}</div>
+      <div className="bg-cardColor text-fontColor mt-3 flex w-full max-w-3xl flex-col items-center rounded-4xl px-6 py-5 shadow-md">
+        <div className="text-lg tracking-widest uppercase">{teamName}</div>
+        <div className="my-1 text-4xl leading-tight">{playerName1}</div>
+        <div className="text-3xl leading-tight">&</div>
+        <div className="my-1 text-4xl leading-tight">{playerName2}</div>
       </div>
     </>
   );
@@ -153,7 +153,7 @@ const MatchList: React.FC<{
   }[];
 }) => {
   return (
-    <div className="mt-1 h-5/6 overflow-y-scroll">
+    <div className="mt-1 h-5/6 w-full max-w-4xl overflow-y-scroll px-4 pb-6">
       {allMatchesList.map((match, index) => (
         <MatchCard
           key={`match-card-${index}`}
@@ -181,18 +181,37 @@ const MatchCard: React.FC<{
 }) => {
   return (
     <>
-      <div className="bg-cardColor text-fontColor mt-3 flex flex-row items-center gap-3 rounded-xl p-3">
-        <span className="text-md">{matchNo}:</span>
-        <div className="text-md flex items-center gap-1">
-          <span>{teamA.player1}</span>
-          <span className="text-sm">&</span>
-          <span>{teamA.player2}</span>
+      <div className="bg-cardColor text-fontColor mt-3 flex w-full flex-col gap-2 rounded-2xl px-4 py-3 shadow-sm sm:flex-row sm:items-center sm:gap-4">
+        <div className="flex items-center justify-between text-xs tracking-wider uppercase sm:justify-start sm:text-sm">
+          <span>Match {matchNo}</span>
+          <span className="sm:hidden">vs</span>
         </div>
-        <span>vs</span>
-        <div className="text-md flex items-center gap-1">
-          <span>{teamB.player1}</span>
-          <span className="text-sm">&</span>
-          <span>{teamB.player2}</span>
+        <div className="flex items-center gap-2 text-xs tracking-wider uppercase sm:text-sm">
+          <span>Team A</span>
+        </div>
+        <div className="text-md flex flex-wrap items-center gap-2 leading-snug">
+          <span className="rounded-full px-2 py-0.5 text-sm sm:text-base">
+            {teamA.player1}
+          </span>
+          <span className="text-xs tracking-wider uppercase sm:text-sm">&</span>
+          <span className="rounded-full px-2 py-0.5 text-sm sm:text-base">
+            {teamA.player2}
+          </span>
+        </div>
+        <span className="hidden text-sm tracking-wider uppercase sm:inline">
+          vs
+        </span>
+        <div className="flex items-center gap-2 text-xs tracking-wider uppercase sm:text-sm">
+          <span>Team B</span>
+        </div>
+        <div className="text-md flex flex-wrap items-center gap-2 leading-snug">
+          <span className="rounded-full px-2 py-0.5 text-sm sm:text-base">
+            {teamB.player1}
+          </span>
+          <span className="text-xs tracking-wider uppercase sm:text-sm">&</span>
+          <span className="rounded-full px-2 py-0.5 text-sm sm:text-base">
+            {teamB.player2}
+          </span>
         </div>
       </div>
     </>

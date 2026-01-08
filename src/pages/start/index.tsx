@@ -13,27 +13,31 @@ export const StartPage: React.FC = () => {
   return (
     <>
       <div className="bg-bgColor flex h-screen w-screen flex-col items-center justify-center">
-        <div className="text-fontColor flex h-1/6 items-center text-4xl underline">
+        <div className="text-fontColor flex h-1/6 items-center text-4xl tracking-wide underline">
           MATCH SETUP
         </div>
-        <div className="flex h-2/3 w-screen flex-col items-center">
+        <div className="flex h-2/3 w-full max-w-4xl flex-col items-center gap-4 px-6">
           <CourtsCard courts={courts} setCourts={setCourts} />
           <PlayersCard players={players} setPlayers={setPlayers} />
-          <div className="my-5 flex flex-col items-center">
-            <div className="text-fontColor">Courts: {courts}</div>
-            <div className="text-fontColor">Players: {players}</div>
+          <div className="bg-cardColor text-fontColor mt-2 flex w-full max-w-2xl items-center justify-between rounded-3xl px-6 py-3 shadow-sm">
+            <div className="text-sm tracking-wide uppercase">Courts</div>
+            <div className="text-2xl">{courts}</div>
+            <div className="text-sm tracking-wide uppercase">Players</div>
+            <div className="text-2xl">{players}</div>
           </div>
         </div>
-        <div className="flex h-1/6 w-screen items-center justify-center">
-          <Button
-            variant="default"
-            size="slg"
-            onClick={() => {
-              void navigate(`/match?courts=${courts}&players=${players}`);
-            }}
-          >
-            Start
-          </Button>
+        <div className="flex h-1/6 w-full items-center justify-center">
+          <div className="flex w-full max-w-4xl justify-center px-6">
+            <Button
+              variant="default"
+              size="slg"
+              onClick={() => {
+                void navigate(`/match?courts=${courts}&players=${players}`);
+              }}
+            >
+              Start
+            </Button>
+          </div>
         </div>
       </div>
     </>
@@ -52,7 +56,7 @@ const CourtsCard: React.FC<{
 }) => {
   return (
     <>
-      <div className="bg-cardColor mt-5 flex w-4/5 flex-col items-center rounded-4xl py-3">
+      <div className="bg-cardColor mt-4 flex w-full max-w-2xl flex-col items-center rounded-4xl px-6 py-4 shadow-md">
         <div className="text-fontColor text-3xl">Courts</div>
         <div className="text-fontColor mb-4 text-sm">
           Number of courts in use
@@ -87,7 +91,7 @@ const PlayersCard: React.FC<{
 }) => {
   return (
     <>
-      <div className="bg-cardColor mt-5 flex w-4/5 flex-col items-center rounded-4xl py-3">
+      <div className="bg-cardColor mt-4 flex w-full max-w-2xl flex-col items-center rounded-4xl px-6 py-4 shadow-md">
         <div className="text-fontColor text-3xl">Players</div>
         <div className="text-fontColor mb-4 text-sm">Number of players</div>
         <Slider
