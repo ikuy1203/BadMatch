@@ -31,8 +31,8 @@ export const MatchPage: React.FC = () => {
         </div>
         <div
           className={cn(
-            'flex min-h-0 w-full max-w-5xl flex-1 flex-col items-center gap-3 overflow-y-auto px-6',
-            viewMode === 'single' ? 'min-h-0' : 'min-h-0',
+            'flex min-h-0 w-full max-w-5xl flex-1 flex-col items-center gap-3 px-6',
+            viewMode === 'single' ? 'overflow-y-auto' : 'overflow-hidden',
           )}
         >
           <div className="bg-cardColor my-2 flex items-center gap-3 rounded-full px-4 py-2 shadow-sm">
@@ -153,7 +153,7 @@ const MatchList: React.FC<{
   }[];
 }) => {
   return (
-    <div className="mt-1 h-5/6 w-full max-w-4xl overflow-y-scroll px-4 pb-6">
+    <div className="mt-1 h-[75dvh] w-full max-w-3xl overflow-auto px-4 pb-6">
       {allMatchesList.map((match, index) => (
         <MatchCard
           key={`match-card-${index}`}
