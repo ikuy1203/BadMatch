@@ -12,7 +12,7 @@ export const StartPage: React.FC = () => {
 
   return (
     <>
-      <div className="bg-bgColor flex min-h-screen w-screen flex-col items-center">
+      <div className="bg-bgColor flex min-h-dvh w-dvw flex-col items-center">
         <div className="text-fontColor flex shrink-0 items-center py-6 text-4xl tracking-wide underline">
           MATCH SETUP
         </div>
